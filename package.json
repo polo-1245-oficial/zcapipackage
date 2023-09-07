@@ -1,6 +1,6 @@
 {
   "name": "toadzonecraftapi",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "El paquete para poder usar la API comunitaria de ZoneCraft. Powered by ToadStudios.",
   "main": "index.js",
   "scripts": {
