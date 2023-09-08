@@ -57,6 +57,34 @@ const online = {
             throw error;
         }
     },
+    lobbies: async () => {
+        try {
+            const kbffa = await online.kbffa();
+            const arenapvp = await online.arenapvp();
+            const skypvp = await online.skypvp();
+            const skywars = await online.skywars();
+            const ctw = await online.ctw();
+            const bw = await online.bedwars();
+            const totales = await online.total();
+            //usando el propio paquete dentro del paquete vaya huevos
+
+            const num1 = parseInt(kbffa[0]);
+            const num2 = parseInt(arenapvp[0]);
+            const num3 = parseInt(skypvp[0]);
+            const num4 = parseInt(skywars[0]);
+            const num5 = parseInt(ctw[0]);
+            const num6 = parseInt(bw[0]);
+            const num7 = parseInt(totales[0]);
+      
+      
+          var todo = num1+num2+num3+num4+num5+num6
+          var lobbies = num7-todo
+      
+            return lobbies;
+        } catch (error) {
+            throw error;
+        }
+    },
 };
 
 const stats = {
@@ -269,20 +297,36 @@ const stats = {
 };
 
 /*
-para otro día
+OTRO DIA
 const top = {
-    get: async (modalidad, mode, time, type, top = 'default') => {
-        //ruta ejemplo https://api.toadstudio.es/api/zstats/stats/skywars/solo/wins/lifetime/top/25
-
-        const apiUrl = `https://api.toadstudio.es/api/zstat/${modalidad}/${type}/${mode}/${time}/top/${top}`;
-  
+    get: async (modalidad, mode, time, type,top = 'default') => {
+      // Verifica si la modalidad es igual a 'ctw' o 'kbffa'
+      if (modalidad === 'ctw' || modalidad === 'kbffa') {
+        // Construye la URL de la API sin el segmento '/${type}'
+        const apiUrl = `https://api.toadstudio.es/api/zstats/stats/${modalidad}/${mode}/${time}/top/${top}`;
         try {
-          const response = await axios.get(apiUrl);
-          return response.data;
-        } catch (error) {
-          throw new Error("Algo está mal. Revisa los docs aquí: https://docs.toadstudio.es");
-        }
-      },
-}
+            const response = await axios.get(apiUrl);
+            return response.data;
+          } catch (error) {
+            throw new Error(apiUrl)
+            throw new Error("Algo está mal. Revisa los docs aquí: https://docs.toadstudio.es");
+          }
+      } else {
+        // Construye la URL de la API con el segmento '/${type}'
+        const apiUrl = `https://api.toadstudio.es/api/zstats/stats/${modalidad}/${type}/${mode}/${time}/top/${top}`;
+        try {
+            const response = await axios.get(apiUrl);
+            return response.data;
+          } catch (error) {
+            throw new Error(apiUrl)
+            throw new Error("Algo está mal. Revisa los docs aquí: https://docs.toadstudio.es");
+          }
+      }
+  
+    
+    },
+  };
 */
+
+
 module.exports = { online, stats };
